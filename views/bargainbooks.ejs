@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title><%= shopData.shopName %> – Bargain Books</title>
+</head>
+<body>
+    <h1>Bargain Books (Under £20)</h1>
+
+    <table border="1" cellpadding="8" cellspacing="0">
+        <tr>
+            <th>Title</th>
+            <th>Price (£)</th>
+        </tr>
+
+        <% if (bargainBooks && bargainBooks.length > 0) { %>
+            <% bargainBooks.forEach(function(book) { %>
+                <tr>
+                    <td><%= book.name %></td>
+                    <td><%= book.price %></td>
+                </tr>
+            <% }) %>
+        <% } else { %>
+            <tr>
+                <td colspan="2">No bargain books found.</td>
+            </tr>
+        <% } %>
+    </table>
+
+    <p><a href="/">Back to home</a></p>
+</body>
+</html>
