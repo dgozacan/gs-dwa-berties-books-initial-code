@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Users – <%= shopData.shopName %></title>
+    <link rel="stylesheet" type="text/css" href="/main.css" />
+  </head>
+  <body>
+    <h1>Users – <%= shopData.shopName %></h1>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>First</th>
+          <th>Last</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% users.forEach(u => { %>
+          <tr>
+            <td><%= u.username %></td>
+            <td><%= u.firstname %></td>
+            <td><%= u.lastname %></td>
+            <td><%= u.email %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </body>
+</html>
