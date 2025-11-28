@@ -5,12 +5,21 @@ const saltRounds = 10;
 
 const db = global.db;   // use the pool from index.js
 
+const redirectLogin = (req, res, next) => {
+    if (!req.session.userId) {
+        res.redirect('./login') // redirect to the login page
+    } else {
+        next() // move to the next middleware function
+    }
+}
+
+
 router.get("/register", (req, res) => {
   res.render("register.ejs");
 });
 
 // GET /users/list — show users without passwords
-router.get("/list", (req, res, next) => {
+router.get("/list", redirectLogin, (req, res, next) => {
   const sql = `
     SELECT username, firstname, lastname, email
     FROM users
@@ -87,6 +96,7 @@ router.post("/loggedin", (req, res, next) => {
       if (err) return next(err);
 
       if (result === true) {
+        req.session.userId = req.body.username;
         res.send("Login successful. Welcome " + username + "!");
       } else {
         res.send("Login failed: incorrect password.");
